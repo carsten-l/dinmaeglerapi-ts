@@ -9,6 +9,7 @@ import auth from "./features/auth/api";
 import users from "./features/users/api";
 import subscribers from './features/subscribers/api';
 import images from "./features/images/api";
+import homes from "./features/homes/api";
 
 const app = new Hono();
 app.use("*", cors());
@@ -38,6 +39,7 @@ app.route("posts", posts);
 app.route("subscribers", subscribers);
 app.route("contact-us", message);
 app.route("images", images);
+app.route("homes", homes);
 
 
 
