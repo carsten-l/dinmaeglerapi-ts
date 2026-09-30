@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String   @unique
+  favorites Home[]   @relation("UserHomes")
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+}
+
+model Home {
+  id             String   @id @default(uuid())
+  slug           String
+  energylabel    String
+  type           String
+  price          Int
+  gross          Int
+  netto          Int
+  payment        Int
+  cost           Int
+  rooms          String
+  livingspace    Int
+  basementsize   Int
+  lotsize        Int
+  address1       String
+  address2       String
+  postalcode     Int
+  city           String
+  description    String
+  built          Int
+  remodel        Int
+  lat            Float
+  long           Float
+  images         Image[]  @relation("GalleryImages")
+  floorplan      Image    @relation(fields: [floorplanImgId], references: [id])
+  createdAt      DateTime @default(now())
+  floorplanImgId String
+  agent          Agent    @relation(fields: [agentId], references: [id])
+  agentId        String
+  users          User[]   @relation("UserHomes")
+}
+
+model Agent {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String
+  title       String
+  phone       String
+  email       String
+  description String
+  image       Image    @relation(fields: [imageId], references: [id])
+  createdAt   DateTime @default(now())
+  imageId     String
+  homes       Home[]
+}
+
+model Subscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Image {
+  id          String   @id @default(uuid())
+  path        String
+  width       Int
+  height      Int
+  createdAt   DateTime @default(now())
+  homeGallery Home[]   @relation("GalleryImages")
+  homes       Home[]
+  agents      Agent[]
+}

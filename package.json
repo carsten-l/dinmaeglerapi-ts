@@ -1,0 +1,44 @@
+{
+  "name": "hono-api-starter",
+  "version": "1.0.0",
+  "description": "Starter template for REST api using Hono.dev and SQLite",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carsten-l/hono-api-starter.git"
+  },
+  "keywords": [
+    "hono",
+    "rest",
+    "sqlite"
+  ],
+  "author": "carsten-l",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carsten-l/hono-api-starter/issues"
+  },
+  "homepage": "https://github.com/carsten-l/hono-api-starter#readme",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^24.0.10",
+    "dotenv": "^17.2.3",
+    "prisma": "^7.10.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.1.3",
+    "@hono/zod-validator": "^0.9.1",
+    "@prisma/adapter-better-sqlite3": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "bcryptjs": "^3.0.2",
+    "hono": "^4.13.12",
+    "image-size": "^2.0.2",
+    "zod": "^4.1.0"
+  }
+}
