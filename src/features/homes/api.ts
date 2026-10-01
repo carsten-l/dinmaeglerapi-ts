@@ -6,6 +6,7 @@ import { zValidator } from "@hono/zod-validator";
 import {
   createHomeSchema,
   homeIdSchema,
+  homeSlugSchema,
   homeListQuerySchema,
   updateHomeSchema,
   type NewHome,
@@ -16,6 +17,7 @@ import {
   deleteHome,
   getAllHomes,
   getHomeById,
+  getHomeBySlug,
   getHomesCount,
   updateHome,
 } from "./services";
@@ -49,6 +51,15 @@ const validateHomeId = zValidator("param", homeIdSchema, (result) => {
   }
 });
 
+const validateHomeSlug = zValidator("param", homeSlugSchema, (result) => {
+  if (!result.success) {
+    throw new HTTPException(400, {
+      message: "Invalid home ID",
+      cause: flattenError(result.error),
+    });
+  }
+});
+
 const validateHomeListQuery = zValidator("query", homeListQuerySchema, (result) => {
   if (!result.success) {
     throw new HTTPException(400, {
@@ -69,9 +80,15 @@ homes.get("/count", async (c) => {
   return c.json({ data: { count } });
 });
 
-homes.get("/:id", validateHomeId, async (c) => {
+homes.get("/id/:id", validateHomeId, async (c) => {
   const { id } = c.req.valid("param");
   const home = await getHomeById(id);
+  return c.json({ data: home });
+});
+
+homes.get("/:slug", validateHomeSlug, async (c) => {
+  const { slug } = c.req.valid("param");
+  const home = await getHomeBySlug(slug);
   return c.json({ data: home });
 });
 

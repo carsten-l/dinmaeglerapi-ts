@@ -27,6 +27,14 @@ export async function getHomeById(id: string) {
   return home;
 }
 
+export async function getHomeBySlug(slug: string) {
+  const home = await prisma.home.findUnique({ where: { slug } });
+  if (!home) {
+    throw new HTTPException(404, { message: "Home not found" });
+  }
+  return home;
+}
+
 export function createHome(data: NewHome) {
   return prisma.home.create({ data });
 }

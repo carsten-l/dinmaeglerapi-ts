@@ -37,7 +37,11 @@ export const updateHomeSchema = z
   });
 
 export const homeIdSchema = z.object({
-  id: z.string().min(1),
+  id: z.uuid(),
+});
+
+export const homeSlugSchema = z.object({
+  slug: z.string().min(1),
 });
 
 export const homeListQuerySchema = z
