@@ -10,8 +10,8 @@ export const createAgentSchema = z.object({
   imageId: z.string().min(1),
 }).strict();
 
-export const agentIdSchema = z.object({
-  id: z.string().min(1),
+export const agentSlugSchema = z.object({
+  slug: z.string().min(1),
 });
 
 export const agentListQuerySchema = z.object({

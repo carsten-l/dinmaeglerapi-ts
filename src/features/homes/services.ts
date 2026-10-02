@@ -2,17 +2,17 @@ import { HTTPException } from "hono/http-exception";
 import prisma from "../../core/db";
 import type { HomeListQuery, HomeUpdate, NewHome } from "./validation";
 
-export function getAllHomes({ limit, offset, price_gte, price_lte, type_eq }: HomeListQuery) {
+export function getAllHomes(limit?: number, offset?: number) {
   return prisma.home.findMany({
-    where: {
-      ...(price_gte !== undefined && price_lte !== undefined
-        ? { price: { gte: price_gte, lte: price_lte } }
-        : {}),
-      ...(type_eq !== undefined ? { type: type_eq } : {}),
-    },
     take: limit,
     skip: offset,
-  });
+    
+    select: { id: true, slug: true, type: true, energylabel: true, price: true, cost: true, rooms: true, address1: true, address2: true,
+        postalcode: true, city: true, createdAt: true, thumbnail: { omit: {id: true, createdAt: true}}
+     },
+     
+  },
+  );
 }
 
 export function getHomesCount() {
@@ -20,7 +20,7 @@ export function getHomesCount() {
 }
 
 export async function getHomeById(id: string) {
-  const home = await prisma.home.findUnique({ where: { id } });
+  const home = await prisma.home.findUnique({ where: { id }  });
   if (!home) {
     throw new HTTPException(404, { message: "Home not found" });
   }
@@ -28,10 +28,31 @@ export async function getHomeById(id: string) {
 }
 
 export async function getHomeBySlug(slug: string) {
-  const home = await prisma.home.findUnique({ where: { slug } });
+  const home = await prisma.home.findUnique({ 
+    where: { slug },
+    include: {
+        images: { omit: {id: true, createdAt: true}},
+        floorplan: {omit: {id: true, createdAt: true}},
+        agent: {include: {image: {omit: {id: true, createdAt: true}} },omit: {id: true, createdAt: true, imageId: true}}
+    }, 
+    omit: {floorplanImgId: true, thumbnailImgId: true, agentId: true}
+  });
   if (!home) {
     throw new HTTPException(404, { message: "Home not found" });
   }
+
+  home.images.sort((a, b) => {
+const aInternal = a.path.startsWith("/int_g");
+const bInternal = b.path.startsWith("/int_g");
+
+if (aInternal === bInternal) {
+return 0;
+}
+
+return aInternal ? 1 : -1;
+});
+
+
   return home;
 }
 

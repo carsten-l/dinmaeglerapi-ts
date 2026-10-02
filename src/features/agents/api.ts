@@ -4,19 +4,19 @@ import { HTTPException } from "hono/http-exception";
 import { flattenError } from "zod";
 import { zValidator } from "@hono/zod-validator";
 import {
-  agentIdSchema,
+  agentSlugSchema,
   agentListQuerySchema,
   createAgentSchema,
   type NewAgent,
 } from "./validation";
-import { createAgent, getAgentById, getAllAgents } from "./services";
+import { createAgent, getAgentBySlug, getAllAgents } from "./services";
 
 const agents = new Hono();
 
-const validateAgentId = zValidator("param", agentIdSchema, (result) => {
+const validateAgentSlug = zValidator("param", agentSlugSchema, (result) => {
   if (!result.success) {
     throw new HTTPException(400, {
-      message: "Invalid agent ID",
+      message: "Invalid agent slug",
       cause: flattenError(result.error),
     });
   }
@@ -46,9 +46,9 @@ agents.get("/", validateAgentListQuery, async (c) => {
   return c.json({ data: results, meta: { count: results.length } });
 });
 
-agents.get("/:id", validateAgentId, async (c) => {
-  const { id } = c.req.valid("param");
-  const agent = await getAgentById(id);
+agents.get("/:slug", validateAgentSlug, async (c) => {
+  const { slug } = c.req.valid("param");
+  const agent = await getAgentBySlug(slug);
   return c.json({ data: agent });
 });
 

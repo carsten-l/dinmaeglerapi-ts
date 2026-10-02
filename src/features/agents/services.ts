@@ -4,14 +4,18 @@ import type { NewAgent } from "./validation";
 
 export function getAllAgents(limit?: number, offset?: number) {
   return prisma.agent.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: { createdAt: "asc" },
     take: limit,
     skip: offset,
   });
 }
 
-export async function getAgentById(id: string) {
-  const agent = await prisma.agent.findUnique({ where: { id } });
+export async function getAgentBySlug(slug: string) {
+  const agent = await prisma.agent.findUnique({ 
+    where: { slug },
+    include: { image: true },
+    omit: { imageId: true }
+ });
   if (!agent) {
     throw new HTTPException(404, { message: "Agent not found" });
   }

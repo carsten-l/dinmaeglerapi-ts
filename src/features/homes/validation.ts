@@ -47,27 +47,8 @@ export const homeSlugSchema = z.object({
 export const homeListQuerySchema = z
   .object({
     limit: z.coerce.number().int().positive().optional(),
-    offset: z.coerce.number().int().nonnegative().optional(),
-    price_gte: z.coerce.number().int().optional(),
-    price_lte: z.coerce.number().int().optional(),
-    type_eq: z.enum(["Ejerlejlighed", "Villa", "Landejendom", "Byhus"]).optional(),
-  })
-  .refine(
-    ({ price_gte, price_lte }) =>
-      (price_gte === undefined) === (price_lte === undefined),
-    {
-      message: "Both price_gte and price_lte are required together.",
-      path: ["price_lte"],
-    },
-  )
-  .refine(
-    ({ price_gte, price_lte }) =>
-      price_gte === undefined || price_lte === undefined || price_gte <= price_lte,
-    {
-      message: "price_gte must be less than or equal to price_lte.",
-      path: ["price_gte"],
-    },
-  );
+    offset: z.coerce.number().int().nonnegative().optional()
+ });
 
 export type NewHome = z.infer<typeof createHomeSchema>;
 export type HomeUpdate = z.infer<typeof updateHomeSchema>;

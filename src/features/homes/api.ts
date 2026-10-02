@@ -71,7 +71,7 @@ const validateHomeListQuery = zValidator("query", homeListQuerySchema, (result) 
 
 homes.get("/", validateHomeListQuery, async (c) => {
   const query = c.req.valid("query");
-  const results = await getAllHomes(query);
+  const results = await getAllHomes(query.limit, query.offset);
   return c.json({ data: results, meta: { count: results.length } });
 });
 

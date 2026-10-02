@@ -32,21 +32,23 @@ model Home {
   cost           Int
   rooms          String
   livingspace    Int
-  basementsize   Int
-  lotsize        Int
+  basementsize   Int?
+  lotsize        Int?
   address1       String
-  address2       String
+  address2       String?
   postalcode     Int
   city           String
   description    String
   built          Int
-  remodel        Int
+  remodel        Int?
   lat            Float
   long           Float
   images         Image[]  @relation("GalleryImages")
-  floorplan      Image    @relation(fields: [floorplanImgId], references: [id])
+  floorplan      Image    @relation("floorplanImage", fields: [floorplanImgId], references: [id])
+  thumbnail      Image?   @relation("thumbnailImage", fields: [thumbnailImgId], references: [id])
   createdAt      DateTime @default(now())
   floorplanImgId String
+  thumbnailImgId String?  @unique
   agent          Agent    @relation(fields: [agentId], references: [id])
   agentId        String
   users          User[]   @relation("UserHomes")
@@ -88,6 +90,7 @@ model Image {
   height      Int
   createdAt   DateTime @default(now())
   homeGallery Home[]   @relation("GalleryImages")
-  homes       Home[]
+  floorplan   Home[]   @relation("floorplanImage")
+  thumbnail   Home?    @relation("thumbnailImage")
   agents      Agent[]
 }
