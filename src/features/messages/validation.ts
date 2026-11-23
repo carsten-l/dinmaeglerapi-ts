@@ -10,6 +10,8 @@ export const messageSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
+export const newMessageSchema = messageSchema.omit({id: true}) 
+
 export type Message = z.infer<typeof messageSchema>;
-export type NewMessage = Omit<Message, 'id'> ;
+export type NewMessage = z.infer<typeof newMessageSchema> ;
 

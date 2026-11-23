@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { messageSchema } from "./validation";
+import { newMessageSchema } from "./validation";
 import { getAllMessages, createMessage } from "./services";
 
 const messages = new Hono();
 
-const validateMessage = zValidator("json", messageSchema, (result, c) => {
+const validateMessage = zValidator("json", newMessageSchema, (result, c) => {
     if (!result.success) {
         return c.json({ error: result.error }, 400);
     }
