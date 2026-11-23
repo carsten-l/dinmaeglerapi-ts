@@ -1,9 +1,11 @@
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 import { PrismaClient, type Prisma } from "../../generated/prisma/client";
 
-const adapter = new PrismaBetterSqlite3(
-  { url: process.env.DATABASE_URL as string },
-  { timestampFormat: "unixepoch-ms" },
+const adapter = new PrismaLibSql(
+  {
+    url: process.env.DATABASE_URL!,
+    authToken: process.env.AUTH_TOKEN!,
+  },
 );
 
 const prisma = new PrismaClient({ adapter }); 
