@@ -1,13 +1,23 @@
 import prisma from "../../core/db";
 
+
+
 export async function getAllSubscribers() {
-  return prisma.subscriber.findMany();
+  return await prisma.subscriber.findMany();
 }
 
 export async function createSubscriber(email: string) {
-  return prisma.subscriber.create({ data: { email } });
+
+    const olderThan12Hours = Date.now() - 12 * 60 * 60 * 1000;
+
+    await prisma.subscriber.deleteMany({
+      where: { createdAt: { lt: new Date(olderThan12Hours) } }
+    });
+
+    return await prisma.subscriber.create({ data: { email } });
 }
 
+
 export async function deleteSubscriber(email: string) {
-  return prisma.subscriber.delete({ where: { email } });
+  return await prisma.subscriber.delete({ where: { email } });
 }

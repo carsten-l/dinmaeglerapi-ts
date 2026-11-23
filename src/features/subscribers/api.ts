@@ -31,10 +31,10 @@ subscribers.post("/", validatesubscriber, async (c) => {
 });
 
 
-subscribers.delete("/", async (c) => {
-  const body = await c.req.json();
+subscribers.delete("/", validatesubscriber, async (c) => {
+  const body = c.req.valid("json");
   await deleteSubscriber(body.email);
-  return c.status(204);
+  return c.body(null, 204);
 });
 
 export default subscribers;
