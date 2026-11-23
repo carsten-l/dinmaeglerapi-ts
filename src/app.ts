@@ -11,11 +11,12 @@ import images from "./features/images/api";
 import homes from "./features/homes/api";
 import agents from "./features/agents/api";
 import favorites from "./features/favorites/api";
+import messages from "./features/messages/api";
 
 const app = new Hono();
 app.use("*", cors());
 app.use("*", logger());
-app.use("/file-bucket/*", serveStatic({ root: "./public" }));
+app.use("/*", serveStatic({ root: "./public" }));
 
 app.onError((error, c) => {
   if (error instanceof HTTPException) {
@@ -42,6 +43,7 @@ app.route("images", images);
 app.route("homes", homes);
 app.route("agents", agents);
 app.route("favorites", favorites);
+app.route("messages", messages);
 
 
 
