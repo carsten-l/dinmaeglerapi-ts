@@ -1,5 +1,5 @@
 import { HTTPException } from "hono/http-exception";
-import prisma from "../../core/db";
+import prisma from "../../core/db.ts";
 import type { NewAgent } from "./validation.ts";
 
 export function getAllAgents(limit?: number, offset?: number) {
