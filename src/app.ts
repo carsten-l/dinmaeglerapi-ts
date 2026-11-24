@@ -3,7 +3,6 @@ import { logger } from "hono/logger";
 import { Hono } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { HTTPException } from 'hono/http-exception'
-import message from './features/messages/api';
 import auth from "./features/auth/api";
 import users from "./features/users/api";
 import subscribers from './features/subscribers/api';
@@ -38,7 +37,6 @@ app.onError((error, c) => {
 app.route("auth", auth);
 app.route("users", users);
 app.route("subscribers", subscribers);
-app.route("contact-us", message);
 app.route("images", images);
 app.route("homes", homes);
 app.route("agents", agents);
