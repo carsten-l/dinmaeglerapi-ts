@@ -1,6 +1,6 @@
 import { HTTPException } from "hono/http-exception";
 import prisma from "../../core/db";
-import type { NewAgent } from "./validation";
+import type { NewAgent } from "./validation.ts";
 
 export function getAllAgents(limit?: number, offset?: number) {
   return prisma.agent.findMany({

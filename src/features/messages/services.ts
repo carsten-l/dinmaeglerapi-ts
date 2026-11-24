@@ -1,6 +1,6 @@
 // src/services/messages.service.ts
-import prisma, { Prisma } from "../../core/db";
-import type { NewMessage } from "../messages/validation"; 
+import prisma, { Prisma } from "../../core/db.ts";
+import type { NewMessage } from "../messages/validation.ts"; 
 
 
   export async function createMessage (data: NewMessage) {

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { newMessageSchema } from "./validation";
-import { getAllMessages, createMessage } from "./services";
+import { newMessageSchema } from "./validation.ts";
+import { getAllMessages, createMessage } from "./services.ts";
 
 const messages = new Hono();
 

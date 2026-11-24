@@ -1,7 +1,7 @@
-import prisma from "../../core/db";
+import prisma from "../../core/db.ts";
 import { hashSync } from "bcryptjs";
 import { HTTPException } from "hono/http-exception";
-import type { UpdateUser } from "./validation";
+import type { UpdateUser } from "./validation.ts";
 
 export async function getUserById(id: number) {
   const user = await prisma.user.findUnique({ where: { id } });

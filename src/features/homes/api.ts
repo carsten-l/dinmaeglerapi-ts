@@ -11,7 +11,7 @@ import {
   updateHomeSchema,
   type NewHome,
   type HomeUpdate,
-} from "./validation";
+} from "./validation.ts";
 import {
   createHome,
   deleteHome,
@@ -20,7 +20,7 @@ import {
   getHomeBySlug,
   getHomesCount,
   updateHome,
-} from "./services";
+} from "./services.ts";
 
 const homes = new Hono();
 

@@ -8,8 +8,8 @@ import {
   agentListQuerySchema,
   createAgentSchema,
   type NewAgent,
-} from "./validation";
-import { createAgent, getAgentBySlug, getAllAgents } from "./services";
+} from "./validation.ts";
+import { createAgent, getAgentBySlug, getAllAgents } from "./services.ts";
 
 const agents = new Hono();
 

@@ -1,5 +1,5 @@
-import type { NewUser, LoginUser } from "../users/validation";
-import prisma, { Prisma } from "../../core/db";
+import type { NewUser, LoginUser } from "../users/validation.ts";
+import prisma, { Prisma } from "../../core/db.ts";
 import { HTTPException } from 'hono/http-exception'
 import { hashSync, compareSync } from "bcryptjs";
 import { sign } from "hono/jwt";

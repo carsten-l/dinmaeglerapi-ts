@@ -6,12 +6,12 @@ import { zValidator } from "@hono/zod-validator";
 import {
   favoriteHomeIdSchema,
   favoritesUserPayloadSchema,
-} from "./validation";
+} from "./validation.ts";
 import {
   addFavorite,
   getUserFavorites,
   removeFavorite,
-} from "./services";
+} from "./services.ts";
 
 const favorites = new Hono();
 

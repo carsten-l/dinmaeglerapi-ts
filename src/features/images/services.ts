@@ -1,10 +1,10 @@
-import prisma from "../../core/db";
+import prisma from "../../core/db.ts";
 import { HTTPException } from "hono/http-exception";
-import type { NewUploadedImage, UpdateImage } from "./validation";
+import type { NewUploadedImage, UpdateImage } from "./validation.ts";
 import {
   deleteStoredImage,
   storeUploadedImage,
-} from "./upload/storage";
+} from "./upload/storage.ts";
 
 export async function getAllImages() {
   return prisma.image.findMany({

@@ -9,11 +9,11 @@ import {
   getAllImages,
   getImageById,
   updateImageFromUpload,
-} from "./services";
+} from "./services.ts";
 import {
   parseCreateImageUpload,
   parseUpdateImageUpload,
-} from "./upload/formData";
+} from "./upload/formData.ts";
 
 const images = new Hono();
 

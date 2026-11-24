@@ -1,5 +1,5 @@
 import { HTTPException } from "hono/http-exception";
-import prisma from "../../core/db";
+import prisma from "../../core/db.ts";
 
 async function ensureUserAndHomeExist(userId: number, homeId: string) {
   const [user, home] = await Promise.all([

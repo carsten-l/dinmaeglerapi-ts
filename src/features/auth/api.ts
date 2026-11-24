@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { z, flattenError } from "zod";
 import { HTTPException } from 'hono/http-exception'
-import { createUser, loginUser } from "./service";
-import { userSchema } from "../users/validation";
+import { createUser, loginUser } from "./service.ts";
+import { userSchema } from "../users/validation.ts";
 import { zValidator } from "@hono/zod-validator";
 
 const auth = new Hono();

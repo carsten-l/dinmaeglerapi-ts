@@ -1,12 +1,11 @@
 import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
-import { subscriberSchema } from "./validation";
+import { subscriberSchema } from "./validation.ts";
 import {
   createSubscriber,
   getAllSubscribers,
   deleteSubscriber
-} from "./services";
-import { success } from "zod";
+} from "./services.ts";
 
 const subscribers = new Hono();
 

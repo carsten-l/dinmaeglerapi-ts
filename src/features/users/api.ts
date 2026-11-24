@@ -3,8 +3,8 @@ import { jwt } from "hono/jwt";
 import { HTTPException } from "hono/http-exception";
 import { z, flattenError } from "zod";
 import { zValidator } from "@hono/zod-validator";
-import { getUserById, updateUser } from "./services";
-import { updateUserSchema, userTokenSchema, type UpdateUser } from "./validation";
+import { getUserById, updateUser } from "./services.ts";
+import { updateUserSchema, userTokenSchema, type UpdateUser } from "./validation.ts";
 
 const users = new Hono();
 

@@ -1,6 +1,6 @@
 import { HTTPException } from "hono/http-exception";
-import prisma from "../../core/db";
-import type { HomeListQuery, HomeUpdate, NewHome } from "./validation";
+import prisma from "../../core/db.ts";
+import type { HomeUpdate, NewHome } from "./validation.ts";
 
 export function getAllHomes(limit?: number, offset?: number) {
   return prisma.home.findMany({
