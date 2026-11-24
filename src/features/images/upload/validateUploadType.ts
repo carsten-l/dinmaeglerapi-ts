@@ -1,6 +1,6 @@
 import path from "node:path";
 import { HTTPException } from "hono/http-exception";
-import { ALLOWED_IMAGE_FORMATS, type SupportedImageFormat } from "./formats";
+import { ALLOWED_IMAGE_FORMATS, type SupportedImageFormat } from "./formats.ts";
 
 function detectImageFormatFromBuffer(
   fileBuffer: Buffer

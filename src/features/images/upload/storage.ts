@@ -3,8 +3,8 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { HTTPException } from "hono/http-exception";
 import { imageSize } from "image-size";
-import { ALLOWED_IMAGE_FORMATS } from "./formats";
-import { validateUploadType } from "./validateUploadType";
+import { ALLOWED_IMAGE_FORMATS } from "./formats.ts";
+import { validateUploadType } from "./validateUploadType.ts";
 
 const FILE_BUCKET_DIRECTORY = path.join(process.cwd(), "public", "file-bucket");
 const FILE_BUCKET_PUBLIC_PREFIX = "/file-bucket/";

@@ -5,7 +5,7 @@ import {
   updateImageSchema,
   type NewUploadedImage,
   type UpdateImage,
-} from "../validation";
+} from "../validation.ts";
 
 export type ParsedCreateImageUpload = {
   file: File;
