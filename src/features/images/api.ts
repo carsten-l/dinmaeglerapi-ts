@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 import { flattenError } from "zod";
 import { HTTPException } from "hono/http-exception";
-import { imageIdParamSchema } from "./validation";
+import { imageIdParamSchema } from "./validation.ts";
 import {
   createImageFromUpload,
   deleteImage,
