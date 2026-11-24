@@ -4,6 +4,6 @@ import app from './app'
 
 
 serve({
-    fetch: app.fetch,
-    port: 3000,
-})
+  fetch: app.fetch,
+  port: Number(process.env.PORT) || 3000,
+});
