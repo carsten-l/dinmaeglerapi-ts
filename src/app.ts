@@ -3,14 +3,14 @@ import { logger } from "hono/logger";
 import { Hono } from "hono";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { HTTPException } from 'hono/http-exception'
-import auth from "./features/auth/api";
-import users from "./features/users/api";
-import subscribers from './features/subscribers/api';
-import images from "./features/images/api";
-import homes from "./features/homes/api";
-import agents from "./features/agents/api";
-import favorites from "./features/favorites/api";
-import messages from "./features/messages/api";
+import auth from "./features/auth/api.ts";
+import users from "./features/users/api.ts";
+import subscribers from './features/subscribers/api.ts';
+import images from "./features/images/api.ts";
+import homes from "./features/homes/api.ts";
+import agents from "./features/agents/api.ts";
+import favorites from "./features/favorites/api.ts";
+import messages from "./features/messages/api.ts";
 
 const app = new Hono();
 app.use("*", cors());
