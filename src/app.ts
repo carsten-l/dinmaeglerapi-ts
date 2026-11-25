@@ -15,7 +15,11 @@ import messages from "./features/messages/api.ts";
 const app = new Hono();
 app.use("*", cors());
 app.use("*", logger());
-app.use("/*", serveStatic({ root: "./public" }));
+//app.use("/*", serveStatic({ root: "./public" }));
+
+app.get("/", (c) => {
+  return c.text("API virker");
+});
 
 app.onError((error, c) => {
   if (error instanceof HTTPException) {
@@ -34,14 +38,14 @@ app.onError((error, c) => {
 })
 
 
-app.route("auth", auth);
-app.route("users", users);
-app.route("subscribers", subscribers);
-app.route("images", images);
-app.route("homes", homes);
-app.route("agents", agents);
-app.route("favorites", favorites);
-app.route("messages", messages);
+app.route("/auth", auth);
+app.route("/users", users);
+app.route("/subscribers", subscribers);
+app.route("/images", images);
+app.route("/homes", homes);
+app.route("/agents", agents);
+app.route("/favorites", favorites);
+app.route("/messages", messages);
 
 
 
