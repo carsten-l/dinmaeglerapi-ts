@@ -8,3 +8,4 @@ serve({
   fetch: app.fetch,
   port: Number(process.env.PORT) || 3000,
 });
+console.log("Server started");
