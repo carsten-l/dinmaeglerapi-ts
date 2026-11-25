@@ -15,11 +15,8 @@ import messages from "./features/messages/api.ts";
 const app = new Hono();
 app.use("*", cors());
 app.use("*", logger());
-//app.use("/*", serveStatic({ root: "./public" }));
+app.use("/*", serveStatic({ root: "./public" }));
 
-app.get("/", (c) => {
-  return c.text("API virker");
-});
 
 app.onError((error, c) => {
   if (error instanceof HTTPException) {
