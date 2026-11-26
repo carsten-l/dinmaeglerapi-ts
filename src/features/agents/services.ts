@@ -7,13 +7,15 @@ export function getAllAgents(limit?: number, offset?: number) {
     orderBy: { createdAt: "asc" },
     take: limit,
     skip: offset,
+    include: { image: { omit: { id: true, createdAt: true } } }, 
+    omit: { imageId: true }
   });
 }
 
 export async function getAgentBySlug(slug: string) {
   const agent = await prisma.agent.findUnique({ 
     where: { slug },
-    include: { image: true },
+    include: { image: {omit: {id: true, createdAt: true} } },
     omit: { imageId: true }
  });
   if (!agent) {
