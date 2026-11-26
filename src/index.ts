@@ -3,7 +3,7 @@ import { serve } from '@hono/node-server'
 import app from './app.ts'
 
 console.log("Application starting...")
-console.log("PORT:", process.env.PORT)
+console.log("PORT:", process.env.PORT || 4000)
 
 serve({
   fetch: app.fetch,
